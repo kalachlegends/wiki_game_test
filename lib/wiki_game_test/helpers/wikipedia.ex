@@ -20,6 +20,11 @@ defmodule WikiGameTest.Wikipedia do
 
         get(url, params, location)
 
+      {:error, %HTTPoison.Error{reason: :checkout_timeout, id: nil}} ->
+        Logger.error("checkout_timeoutl: #{url}")
+        Process.sleep(16_0000)
+        get(url, params, url_full)
+
       any ->
         IO.inspect(any)
         Logger.error("ERROR FROM GITHUPHELPER url: #{url}")

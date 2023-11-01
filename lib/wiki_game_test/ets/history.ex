@@ -8,7 +8,7 @@ defmodule WikiGameTest.Ets.History do
         :ets.insert(@table_name, {List.first(history), history, %{is_find: true}})
 
       [] ->
-        :ets.insert(@table_name, {page, nil, %{is_find: false}})
+        :ets.insert(@table_name, {page, history, %{is_find: false}})
     end
   end
 

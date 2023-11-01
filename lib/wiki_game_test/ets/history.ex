@@ -1,13 +1,14 @@
 defmodule WikiGameTest.Ets.History do
   use GenServer
   @table_name :history_links
-  def insert(page, history_page) do
+  def insert(page, history) do
     case :ets.lookup(@table_name, page) do
-      [{_page, history_list}] ->
-        :ets.insert(@table_name, {page, [history_page | history_list]})
+      [_] ->
+        :ets.insert(@table_name, {page, history, %{is_find: true}})
+        :ets.insert(@table_name, {List.first(history), history, %{is_find: true}})
 
       [] ->
-        :ets.insert_new(@table_name, {page, [history_page]})
+        :ets.insert(@table_name, {page, nil, %{is_find: false}})
     end
   end
 

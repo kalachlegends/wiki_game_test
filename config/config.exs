@@ -9,7 +9,8 @@ import Config
 
 config :wiki_game_test,
   ecto_repos: [WikiGameTest.Repo],
-  adolf_link: "/wiki/Adolf_Hitler"
+  adolf_link: "/wiki/Adolf_Hitler",
+  word_of_war_link: "/wiki/World_War_II"
 
 # Configures the endpoint
 config :wiki_game_test, WikiGameTestWeb.Endpoint,

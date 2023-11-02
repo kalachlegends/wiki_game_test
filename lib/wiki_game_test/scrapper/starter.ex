@@ -10,6 +10,7 @@ defmodule WikiGameTest.Scrapper.Starter do
       links_from_adolf
       |> Enum.each(fn x_link ->
         HistoryLinks.update_or_create(%{link: x_link}, %{link: x_link, lvl_to_gitler: 0})
+        WikiGameTest.Ets.Cache.push_lvl_to_gitler(0, x_link)
       end)
     end
   end

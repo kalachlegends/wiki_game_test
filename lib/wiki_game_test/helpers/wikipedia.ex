@@ -15,10 +15,10 @@ defmodule WikiGameTest.Wikipedia do
       {:ok, %{status_code: 404}} ->
         {:error, :not_found}
 
-      {:ok, %{status_code: 301, headers: headers}} ->
-        {_, location} = Enum.find(headers, fn head -> head |> elem(0) == "Location" end)
+      # {:ok, %{status_code: 301, headers: headers}} ->
+      #   {_, location} = Enum.find(headers, fn head -> head |> elem(0) == "Location" end)
 
-        get(url, params, location)
+      #   get(url, params, location)
 
       {:error, %HTTPoison.Error{reason: :checkout_timeout, id: nil}} ->
         Logger.error("checkout_timeoutl: #{url}")

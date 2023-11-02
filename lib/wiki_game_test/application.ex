@@ -5,14 +5,14 @@ defmodule WikiGameTest.Application do
 
   use Application
 
-  # defp poolboy_config do
-  #   [
-  #     name: {:local, :worker},
-  #     worker_module: WikiGameTest.Spider,
-  #     size: 5,
-  #     max_overflow: 3
-  #   ]
-  # end
+  defp poolboy_config do
+    [
+      name: {:local, :worker},
+      worker_module: WikiGameTest.Spider,
+      size: 50,
+      max_overflow: 3
+    ]
+  end
 
   @impl true
   def start(_type, _args) do
@@ -27,7 +27,7 @@ defmodule WikiGameTest.Application do
       {Finch, name: WikiGameTest.Finch},
       # Start the Endpoint (http/https)
       WikiGameTestWeb.Endpoint,
-      # :poolboy.child_spec(:worker, poolboy_config()),
+      :poolboy.child_spec(:worker, poolboy_config()),
       WikiGameTest.Ets.History,
       WikiGameTest.Ets.Cache
       # WikiGameTest.Spider

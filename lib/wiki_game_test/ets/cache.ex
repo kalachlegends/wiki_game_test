@@ -35,6 +35,29 @@ defmodule WikiGameTest.Ets.Cache do
     end
   end
 
+  def push_lvl_to_gitler(lvl_to_gitler, page) do
+    id = "lvl_to_gitler#{lvl_to_gitler}"
+
+    case get(id) do
+      {:ok, {_, pages}} ->
+        if !is_nil(page) do
+          :ets.insert(
+            @table_name,
+            {id, [page | pages]}
+          )
+        end
+
+        {:ok, pages}
+
+      {:error, :not_found} ->
+        :ets.insert(
+          @table_name,
+          {id, [page]}
+        )
+    end
+  end
+
+  @spec get(any) :: {:error, :not_found} | {:ok, tuple}
   def get(id) do
     case :ets.lookup(@table_name, id) do
       [] ->

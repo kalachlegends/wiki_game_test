@@ -3,6 +3,6 @@ defmodule WikiGameTestWeb.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")
-    assert html_response(conn, 200) =~ "Peace of mind from prototype to production"
+    assert html_response(conn, 200) =~ "Wiki game! find gitler from wiki article"
   end
 end

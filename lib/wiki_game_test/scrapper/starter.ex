@@ -14,13 +14,13 @@ defmodule WikiGameTest.Scrapper.Starter do
   end
 
   def start() do
-    # Task.async(fn -> start_lvl_0() end)
-    # Task.async(fn -> start_lvl_1() end)
+    Task.async(fn -> start_lvl_0() end)
+    Task.async(fn -> start_lvl_1() end)
 
     Task.async(fn ->
       (HistoryLinks.get_all!() || [])
       |> Enum.each(fn x ->
-        IO.inspect(x, label: "asx")
+        # IO.inspect(x, label: "asx")
         WikiGameTest.Ets.Cache.push_lvl_to_gitler(x.lvl_to_gitler, x.link)
       end)
     end)
